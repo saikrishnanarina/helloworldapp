@@ -1,8 +1,5 @@
 pipeline{
-    agent{
-        label{
-            label "ubuntu-slave"
-        }
+    agent any
     }
     tools{
         maven "M2_HOME"
@@ -11,7 +8,7 @@ pipeline{
         
         stage('Git'){
             steps{
-            checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[credentialsId: '6f7f5bba-61d5-45e4-82fa-4cf295e7dec9', url: 'https://github.com/muralikrishna188/helloworldapp.git']]]
+              checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/saikrishnanarina/helloworldapp.git']])
             }
         }
         stage('Build'){
